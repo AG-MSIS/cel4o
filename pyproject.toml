@@ -1,0 +1,66 @@
+[project]
+name = "compact_matrix_sqrt"
+version = "0.1.0"
+license = "MIT"
+description = "Compact Sigma-Points via Low-Entry Matrix Square Roots"
+requires-python = "~=3.12.0"
+
+authors = [
+    {name = "Udo Frese", email = "ufrese@uni-bremen.de"}, 
+    {name = "Arne Hasselbring"}
+]
+
+dependencies = [
+  "numpy ~=2.0",
+]
+
+[dependency-groups]
+# Experiments, notebook and visualizations of the paper (paper/).
+paper = [
+  "cma",
+  "ipykernel",
+  "matplotlib ~=3.10",
+  "pygame ~=2.6.0",
+  "scipy ~=1.15",
+  "tqdm",
+]
+test = [
+  "pytest",
+  "scipy ~=1.15",
+]
+
+[tool.uv]
+# A plain `uv sync` installs the full development environment (groups are not part of the
+# published package).
+default-groups = ["paper", "test"]
+
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11>=3.0"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+wheel.packages = ["python/compact_matrix_sqrt"]
+cmake.source-dir = "cxx"
+cmake.build-type = "Release"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "paper/tests"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v"
+markers = [
+  "slow: statistically intensive or computationally expensive tests",
+]
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+extend-select = ["F", "E", "W", "I", "UP", "TCH", "PGH", "NPY", "PERF", "RUF", "N"]

@@ -1,0 +1,14 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python.terminal.activateEnvironment": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python-envs.terminal.autoActivationType": "command",
+    "python.testing.pytestArgs": [
+        "tests",
+        "paper/tests"
+    ],
+    "python.testing.cwd": "${workspaceFolder}",
+    "cmake.sourceDirectory": "${workspaceFolder}/cxx/"
+}
